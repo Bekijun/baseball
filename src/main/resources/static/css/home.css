@@ -1,28 +1,86 @@
+/* 기본 설정 */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
     height: 100vh;
+    display: flex;
     flex-direction: column;
 }
 
-.container {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 400px;
+/* 전체 페이지 컨테이너 */
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+/* 헤더 영역 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #ccc;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 로고와 글자 사이 간격 */
+}
+
+.logo-title img {
+    height: 60px;
+}
+
+.site-name {
+    font-size: 28px;
+    margin: 0;
+    color: #333;
+}
+
+
+.auth-buttons button {
+    margin-left: 10px;
+}
+
+/* 사이드바 */
+.sidebar {
+    width: 200px;
+    background-color: #0b2561;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+}
+
+.menu-button {
+    background-color: #0b2561;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-button:hover {
+    background-color: #14367a;
+}
+
+/* 본문 영역 */
+.content {
+    flex-grow: 1;
+    padding: 30px;
+    background: #ffffff;
 }
 
 h2 {
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 p {
@@ -30,25 +88,25 @@ p {
     font-size: 16px;
 }
 
+/* 팀 선택 셀렉트 박스 및 응원 버튼 */
 .select-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 select {
-    flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     background: #fff;
-    margin-right: 10px;
 }
 
 button {
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -56,22 +114,40 @@ button {
     transition: background 0.3s ease;
 }
 
-button:nth-of-type(1) {
+button.navigate-button {
     background: #007bff;
     color: #fff;
 }
 
-button:nth-of-type(1):hover {
+button.navigate-button:hover {
     background: #0056b3;
 }
 
+/* 로그인/로그아웃 */
 .logout-button {
     background: #dc3545;
     color: #fff;
-    margin-top: auto;
-    width: 100%;
 }
 
 .logout-button:hover {
     background: #a71d2a;
+}
+
+.login-button {
+    background: #49a8f5;
+    color: #fff;
+}
+
+.login-button:hover {
+    background: #237cd8;
+}
+
+/* 푸터 */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+    color: #666;
 }

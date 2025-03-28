@@ -7,5 +7,5 @@ function navigateToPage() {
 }
 
 function navigateToLogin() {
-    window.location.href = "/";
+    window.location.href = "/login";
 }

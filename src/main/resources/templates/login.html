@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>KBO Information Web</title>
+    <meta  http-equiv="Content-Type" content="text/html charset=UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script defer src="/js/scripts.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+        <p th:if="${error}" th:text="${error}" class="error"></p>
+        <form action="/home" method="post">
+            <input type="text" name="username" placeholder="아이디" required>
+            <input type="password" name="password" placeholder="비밀번호" required>
+            <button type="submit">로그인</button>
+        </form>
+        <button onclick="navigateToSignup()">회원가입</button>
+    </div>
+</body>
+</html>

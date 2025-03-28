@@ -11,5 +11,4 @@ public class HomeController {
     public String team(@RequestParam("name") String teamName) {
         return teamName;
     }
-
 }

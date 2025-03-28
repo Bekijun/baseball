@@ -24,6 +24,11 @@ public class AuthController {
         return "signup";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @PostMapping("/home")
     public String home(@RequestParam("username") String username,
                         @RequestParam("password") String password,

@@ -20,7 +20,6 @@ public class SecurityConfig { //스프링부트에서는 SecurityConfig 라이�
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form.disable()); // formLogin 비활성화
-
         return http.build();
     }
 }
