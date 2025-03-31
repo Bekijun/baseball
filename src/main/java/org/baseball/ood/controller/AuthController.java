@@ -9,16 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthController {
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/home")
-    public String homePage() {
-        return "home";
-    }
-
     @GetMapping("/signup")
     public String signup() {
         return "signup";

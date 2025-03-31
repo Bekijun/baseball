@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>HitInfo</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script type="text/javascript" src="/js/home.js"></script>
+</head>
+<body>
+
+<!-- 공통 헤더 -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="main-container">
+    <!-- 공통 사이드바 -->
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+
+    <!-- 본문 -->
+    <section class="content" layout:fragment="content">
+        <!-- 자식 템플릿에서 이 부분을 덮어씀 -->
+    </section>
+</div>
+
+<!-- 공통 푸터 -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
