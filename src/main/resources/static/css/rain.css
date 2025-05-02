@@ -1,0 +1,123 @@
+.weather-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.date-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    background-color: #0b2561;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.game-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.game-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.time-location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.time-location .time {
+    font-weight: bold;
+}
+
+.time-location .location {
+    font-weight: lighter;
+    color: #555;
+}
+
+.teams {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.team img {
+    height: 40px;
+}
+
+.rain-rate {
+    position: absolute;
+    top: 45px;
+    right: 70px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 6px 8px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.weather-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    gap: 5px;
+    width: 100%;
+    border-bottom: none;
+}
+
+.weather-cell img {
+    width: 30px;
+    height: 30px;
+}
+
+.weather-cell span {
+    font-size: 12px;
+}

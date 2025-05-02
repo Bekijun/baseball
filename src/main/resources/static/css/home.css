@@ -23,6 +23,10 @@ body {
     padding: 10px 30px;
     background-color: #ffffff;
     border-bottom: 2px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 .logo-title {
@@ -41,7 +45,6 @@ body {
     color: #333;
 }
 
-
 .auth-buttons button {
     margin-left: 10px;
 }
@@ -54,6 +57,10 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    position: fixed;
+    top: 60px; /* 헤더 아래에 위치하도록 설정 */
+    bottom: 0;
+    z-index: 50;
 }
 
 .menu-button {
@@ -73,6 +80,8 @@ body {
 
 /* 본문 영역 */
 .content {
+    margin-left: 220px; /* 사이드바 너비만큼 여백 추가 */
+    margin-top: 60px; /* 헤더 높이만큼 여백 추가 */
     flex-grow: 1;
     padding: 30px;
     background: #ffffff;

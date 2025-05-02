@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <meta charset="UTF-8">
+    <title>우취예상 AI</title>
+    <link rel="stylesheet" href="/css/rain.css">
+</head>
+<body>
+
+<section layout:fragment="content">
+    <div class="weather-container">
+        <div class="date-toggle">
+            <button type="button" class="toggle-button" data-type="today">오늘</button>
+            <button type="button" class="toggle-button" data-type="tomorrow">내일</button>
+        </div>
+
+        <div class="game-cards">
+            <div class="game-card" th:each="game : ${games}" th:attr="data-time=${game.gameTime}">
+                <div class="game-info">
+                    <div class="time-location">
+                        <span class="time" th:text="${game.time}">15:00</span>
+                        <span class="location" th:text="${game.location}">서울</span>
+                    </div>
+                    <div class="teams">
+                        <div class="team">
+                            <img th:src="@{${game.homeTeamLogo}}" alt="홈팀 로고" />
+                            <span th:text="${game.homeTeamName}">두산 베어스</span>
+                        </div>
+                        <div class="team">
+                            <img th:src="@{${game.awayTeamLogo}}" alt="원정팀 로고" />
+                            <span th:text="${game.awayTeamName}">LG 트윈스</span>
+                        </div>
+                    </div>
+                    <div class="rain-rate">
+                        <span th:text="${game.rainProbability + '%'}">80%</span>
+                    </div>
+                </div>
+
+                <div class="weather-info">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".game-card");
+
+        cards.forEach(card => {
+            const gameTime = card.getAttribute("data-time");
+            const weatherInfoDiv = card.querySelector(".weather-info");
+
+            fetch(`/api/weather?time=${gameTime}`)
+                .then(response => response.json())
+                .then(data => {
+                    weatherInfoDiv.innerHTML = data.map(w => `
+                    <div class="weather-cell">
+                        <span>${w.time}</span>
+                        <img src="${w.iconUrl}" alt="날씨" />
+                        <span>${w.temperature}</span>
+                        <span>${w.precipitation}</span>
+                    </div>
+                `).join('');
+                })
+                .catch(error => {
+                    weatherInfoDiv.innerHTML = "<p>날씨 정보 불러오기 실패</p>";
+                    console.error("날씨 로딩 에러:", error);
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

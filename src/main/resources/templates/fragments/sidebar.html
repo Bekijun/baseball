@@ -16,9 +16,16 @@
         <button class="navigate-button" onclick="navigateToPage()">Go</button>
     </div>
 
-    <button class="menu-button">ChatBot</button>
-    <button class="menu-button">우취 예상 AI</button>
-    <button class="menu-button">정보 마당</button>
-    <button class="menu-button">채팅방</button>
-    <button class="menu-button">마이페이지</button>
+    <button class="menu-button" onclick="navigateTo('chatbot')">ChatBot</button>
+    <button class="menu-button" onclick="navigateTo('rain-predict')">우취 예상 AI</button>
+    <button class="menu-button" onclick="navigateTo('info')">정보 마당</button>
+    <button class="menu-button" onclick="navigateTo('chat')">채팅방</button>
+    <button class="menu-button" onclick="navigateTo('mypage')">마이페이지</button>
+
+    <script>
+        function navigateTo(path) {
+            window.location.href = "/" + path;
+        }
+    </script>
+
 </aside>
