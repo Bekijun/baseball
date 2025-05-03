@@ -1,33 +1,35 @@
 package org.baseball.ood.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.baseball.ood.domain.GameData;
 import org.baseball.ood.domain.WeatherData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class RainController {
 
+    private static final String JSON_PATH = "src/main/python/rain-predict.json";
+
     @GetMapping("/rain-predict")
     public String showRainPredictPage(Model model) {
+        ObjectMapper mapper = new ObjectMapper();
         List<GameData> games = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            GameData game = new GameData();
-            game.setTime("15:00");
-            game.setLocation("서울");
-            game.setHomeTeamName("두산 베어스");
-            game.setAwayTeamName("LG 트윈스");
-            game.setHomeTeamLogo("/images/doosan.png");
-            game.setAwayTeamLogo("/images/lg.png");
-            game.setRainProbability(80);
-            game.setGameTime("2025050218" + i);
-
-            games.add(game);
+        try {
+            File file = new File(JSON_PATH);
+            if (file.exists()) {
+                games = mapper.readValue(file, new TypeReference<List<GameData>>() {});
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         model.addAttribute("games", games);
@@ -37,15 +39,24 @@ public class RainController {
     @GetMapping("/api/weather")
     @ResponseBody
     public List<WeatherData> getWeatherByTime(@RequestParam String time) {
-        List<WeatherData> list = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            WeatherData data = new WeatherData();
-            data.setTime((12 + i) + ":00");
-            data.setIconUrl("/images/cloud.png");
-            data.setTemperature((6 - i) + "°C");
-            data.setPrecipitation("0." + i + "mm");
-            list.add(data);
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            File file = new File(JSON_PATH);
+            if (file.exists()) {
+                List<GameData> games = mapper.readValue(file, new TypeReference<List<GameData>>() {});
+                for (GameData game : games) {
+                    // gameTime 기준이 없어 start_time을 대신 사용
+                    String key = game.getDate() + game.getStart_time().replace(":", "");
+                    if (key.equals(time)) {
+                        return game.getWeather();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return list;
+
+        return new ArrayList<>();
     }
 }

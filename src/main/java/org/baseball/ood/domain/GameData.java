@@ -3,47 +3,65 @@ package org.baseball.ood.domain;
 import java.util.List;
 
 public class GameData {
+    private String date;
+    private String away;
+    private String home;
+    private String stadium;
+    private String start_time;
+    private List<WeatherData> weather;
 
-    private String time;
-    private String location;
-    private String homeTeamName;
-    private String awayTeamName;
+    // 로고 경로 (컨트롤러에서 세팅)
     private String homeTeamLogo;
     private String awayTeamLogo;
-    private int rainProbability;
-    private List<WeatherData> weatherList;
-    private String gameTime;
 
-    public String getTime() {
-        return time;
+    // ✅ Getter & Setter
+
+    public String getDate() {
+        return date;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAway() {
+        return away;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAway(String away) {
+        this.away = away;
     }
 
-    public String getHomeTeamName() {
-        return homeTeamName;
+    public String getHome() {
+        return home;
     }
 
-    public void setHomeTeamName(String homeTeamName) {
-        this.homeTeamName = homeTeamName;
+    public void setHome(String home) {
+        this.home = home;
     }
 
-    public String getAwayTeamName() {
-        return awayTeamName;
+    public String getStadium() {
+        return stadium;
     }
 
-    public void setAwayTeamName(String awayTeamName) {
-        this.awayTeamName = awayTeamName;
+    public void setStadium(String stadium) {
+        this.stadium = stadium;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public List<WeatherData> getWeather() {
+        return weather;
+    }
+
+    public void setWeather(List<WeatherData> weather) {
+        this.weather = weather;
     }
 
     public String getHomeTeamLogo() {
@@ -62,27 +80,8 @@ public class GameData {
         this.awayTeamLogo = awayTeamLogo;
     }
 
-    public int getRainProbability() {
-        return rainProbability;
-    }
-
-    public void setRainProbability(int rainProbability) {
-        this.rainProbability = rainProbability;
-    }
-
-    public List<WeatherData> getWeatherList() {
-        return weatherList;
-    }
-
-    public void setWeatherList(List<WeatherData> weatherList) {
-        this.weatherList = weatherList;
-    }
-
+    // ✅ 가공된 필드 (날짜 + 시작 시간 → 게임 식별용 키)
     public String getGameTime() {
-        return gameTime;
-    }
-
-    public void setGameTime(String gameTime) {
-        this.gameTime = gameTime;
+        return date + start_time.replace(":", "");
     }
 }

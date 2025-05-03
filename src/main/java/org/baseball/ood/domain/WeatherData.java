@@ -1,41 +1,51 @@
 package org.baseball.ood.domain;
 
 public class WeatherData {
+    private String datetime;   // 예: 2025050316
+    private String icon;       // 예: "맑음", "흐림"
+    private String temp;       // 예: "14" (섭씨 온도)
+    private String rain;       // 예: "0" 또는 "6.3"
 
-    private String time;
-    private String iconUrl;
-    private String temperature;
-    private String precipitation;
+    // ✅ Getter & Setter
 
-    public String getTime() {
-        return time;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getTemperature() {
-        return temperature;
+    public String getTemp() {
+        return temp;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 
-    public String getPrecipitation() {
-        return precipitation;
+    public String getRain() {
+        return rain;
     }
 
-    public void setPrecipitation(String precipitation) {
-        this.precipitation = precipitation;
+    public void setRain(String rain) {
+        this.rain = rain;
+    }
+
+    // ✅ 유틸리티 메서드: 시간만 뽑기 (예: "16시")
+    public String getHour() {
+        if (datetime != null && datetime.length() >= 10) {
+            return datetime.substring(8) + "시";
+        } else {
+            return "";
+        }
     }
 }
