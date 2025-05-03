@@ -1,31 +1,6 @@
 <aside class="sidebar" th:fragment="sidebar">
-    <div class="select-container">
-        <select id="clubSelect" name="club">
-            <option value="index">KBO</option>
-            <option value="lotte">롯데 자이언츠</option>
-            <option value="samsung">삼성 라이온즈</option>
-            <option value="kia">KIA 타이거즈</option>
-            <option value="lg">LG 트윈스</option>
-            <option value="doosan">두산 베어스</option>
-            <option value="kt">KT 위즈</option>
-            <option value="ssg">SSG 랜더스</option>
-            <option value="hanwha">한화 이글스</option>
-            <option value="nc">NC 다이노스</option>
-            <option value="kiwoom">키움 히어로즈</option>
-        </select>
-        <button class="navigate-button" onclick="navigateToPage()">Go</button>
-    </div>
 
     <button class="menu-button" onclick="navigateTo('chatbot')">ChatBot</button>
     <button class="menu-button" onclick="navigateTo('rain-predict')">우취 예상 AI</button>
-    <button class="menu-button" onclick="navigateTo('info')">정보 마당</button>
-    <button class="menu-button" onclick="navigateTo('chat')">채팅방</button>
-    <button class="menu-button" onclick="navigateTo('mypage')">마이페이지</button>
-
-    <script>
-        function navigateTo(path) {
-            window.location.href = "/" + path;
-        }
-    </script>
 
 </aside>
