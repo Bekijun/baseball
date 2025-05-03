@@ -1,0 +1,319 @@
+[
+  {
+    "date": "20250503",
+    "away": "한화",
+    "home": "KIA",
+    "stadium": "광주",
+    "start_time": "14:00",
+    "weather": []
+  },
+  {
+    "date": "20250503",
+    "away": "SSG",
+    "home": "LG",
+    "stadium": "잠실",
+    "start_time": "17:00",
+    "weather": [
+      {
+        "datetime": "2025050318",
+        "icon": "구름조금",
+        "temp": "16",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050319",
+        "icon": "맑음",
+        "temp": "15",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250503",
+    "away": "NC",
+    "home": "롯데",
+    "stadium": "사직",
+    "start_time": "17:00",
+    "weather": [
+      {
+        "datetime": "2025050318",
+        "icon": "맑음",
+        "temp": "15",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050319",
+        "icon": "맑음",
+        "temp": "17",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250503",
+    "away": "두산",
+    "home": "삼성",
+    "stadium": "대구",
+    "start_time": "17:00",
+    "weather": [
+      {
+        "datetime": "2025050318",
+        "icon": "맑음",
+        "temp": "14",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050319",
+        "icon": "맑음",
+        "temp": "14",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250503",
+    "away": "키움",
+    "home": "KT",
+    "stadium": "수원",
+    "start_time": "17:00",
+    "weather": [
+      {
+        "datetime": "2025050318",
+        "icon": "맑음",
+        "temp": "12",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050319",
+        "icon": "맑음",
+        "temp": "12",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250504",
+    "away": "SSG",
+    "home": "LG",
+    "stadium": "잠실",
+    "start_time": "14:00",
+    "weather": [
+      {
+        "datetime": "2025050411",
+        "icon": "맑음",
+        "temp": "18",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050412",
+        "icon": "맑음",
+        "temp": "20",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050413",
+        "icon": "맑음",
+        "temp": "20",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050414",
+        "icon": "맑음",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050415",
+        "icon": "맑음",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050416",
+        "icon": "맑음",
+        "temp": "19",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250504",
+    "away": "NC",
+    "home": "롯데",
+    "stadium": "사직",
+    "start_time": "14:00",
+    "weather": [
+      {
+        "datetime": "2025050411",
+        "icon": "맑음",
+        "temp": "18",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050412",
+        "icon": "맑음",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050413",
+        "icon": "맑음",
+        "temp": "20",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050414",
+        "icon": "맑음",
+        "temp": "21",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050415",
+        "icon": "구름조금",
+        "temp": "21",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050416",
+        "icon": "맑음",
+        "temp": "22",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250504",
+    "away": "두산",
+    "home": "삼성",
+    "stadium": "대구",
+    "start_time": "14:00",
+    "weather": [
+      {
+        "datetime": "2025050411",
+        "icon": "맑음",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050412",
+        "icon": "맑음",
+        "temp": "20",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050413",
+        "icon": "맑음",
+        "temp": "22",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050414",
+        "icon": "구름조금",
+        "temp": "23",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050415",
+        "icon": "구름많음",
+        "temp": "23",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050416",
+        "icon": "구름조금",
+        "temp": "23",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250504",
+    "away": "키움",
+    "home": "KT",
+    "stadium": "수원",
+    "start_time": "14:00",
+    "weather": [
+      {
+        "datetime": "2025050411",
+        "icon": "안개",
+        "temp": "17",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050412",
+        "icon": "안개",
+        "temp": "18",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050413",
+        "icon": "안개",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050414",
+        "icon": "안개",
+        "temp": "19",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050415",
+        "icon": "안개",
+        "temp": "18",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050416",
+        "icon": "안개",
+        "temp": "18",
+        "rain": "0"
+      }
+    ]
+  },
+  {
+    "date": "20250504",
+    "away": "한화",
+    "home": "KIA",
+    "stadium": "광주",
+    "start_time": "14:00",
+    "weather": [
+      {
+        "datetime": "2025050411",
+        "icon": "맑음",
+        "temp": "20",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050412",
+        "icon": "맑음",
+        "temp": "21",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050413",
+        "icon": "맑음",
+        "temp": "23",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050414",
+        "icon": "맑음",
+        "temp": "24",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050415",
+        "icon": "맑음",
+        "temp": "23",
+        "rain": "0"
+      },
+      {
+        "datetime": "2025050416",
+        "icon": "맑음",
+        "temp": "22",
+        "rain": "0"
+      }
+    ]
+  }
+]

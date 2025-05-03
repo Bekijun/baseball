@@ -46,7 +46,7 @@
 .game-info {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
     align-items: flex-start;
 }
 
@@ -62,34 +62,44 @@
 }
 
 .time-location .location {
-    font-weight: lighter;
-    color: #555;
+    font-family: 'Segoe UI', 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #999;
 }
 
-.teams {
+.teams-horizontal {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: center;
     align-items: center;
+    gap: 14px;
+    margin-top: 5px;
 }
 
-.team {
+.team.away,
+.team.home {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+}
+
+.team span {
+    font-family: 'Segoe UI', 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 0.5px;
 }
 
 .team img {
-    height: 40px;
+    height: 36px;
+    vertical-align: middle;
 }
 
-.rain-rate {
-    position: absolute;
-    top: 45px;
-    right: 70px;
-    font-size: 40px;
+.vs {
     font-weight: bold;
-    color: #007bff;
+    font-size: 14px;
+    color: #888;
 }
 
 .weather-info {
@@ -110,7 +120,6 @@
     font-size: 12px;
     gap: 5px;
     width: 100%;
-    border-bottom: none;
 }
 
 .weather-cell img {

@@ -23,14 +23,15 @@
                         <span class="time" th:text="${game.start_time}">15:00</span>
                         <span class="location" th:text="${game.stadium}">서울</span>
                     </div>
-                    <div class="teams">
-                        <div class="team">
-                            <img th:src="@{'/images/' + ${game.home} + '.png'}" alt="홈팀 로고" />
-                            <span th:text="${game.home}">홈팀</span>
+                    <div class="teams-horizontal">
+                        <div class="team away">
+                            <span th:text="${game.away}">AWAY</span>
+                            <img th:src="@{'/images/' + ${game.away} + '.jpeg'}" alt="Away Team Logo">
                         </div>
-                        <div class="team">
-                            <img th:src="@{'/images/' + ${game.away} + '.png'}" alt="원정팀 로고" />
-                            <span th:text="${game.away}">원정팀</span>
+                        <div class="vs">VS</div>
+                        <div class="team home">
+                            <img th:src="@{'/images/' + ${game.home} + '.jpeg'}" alt="Home Team Logo">
+                            <span th:text="${game.home}">HOME</span>
                         </div>
                     </div>
                 </div>
