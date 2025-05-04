@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>야구 챗봇</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/scripts.js"></script>
+</head>
+<body>
+
+<div style="padding: 30px;">
+    <h2>야구 정보 챗봇</h2>
+
+    <div class="container">
+        <label for="questionType">질문 유형</label>
+        <select id="questionType">
+            <option value="player">선수</option>
+            <option value="team">팀</option>
+            <option value="term">용어</option>
+        </select>
+
+        <input type="text" id="keyword" placeholder="예: 전준우, 롯데, 타율" />
+
+        <button onclick="askBot()">질문하기</button>
+
+        <div id="chatResult" style="margin-top:20px; font-weight: bold;"></div>
+    </div>
+</div>
+
+<script>
+    function askBot() {
+        const type = document.getElementById("questionType").value;
+        const keyword = document.getElementById("keyword").value;
+
+        fetch("/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question_type: type, keyword: keyword })
+        })
+            .then(response => response.json())  // ✅ JSON으로 받음
+            .then(data => {
+                document.getElementById("chatResult").innerText =
+                    `${type}에 대한 키워드는 ${keyword}입니다\n응답: ${data.answer}`;  // ✅ JSON 파싱 후 출력
+            })
+            .catch(error => {
+                document.getElementById("chatResult").innerText = "서버 오류: " + error;
+            });
+    }
+</script>
+
+</body>
+</html>
