@@ -19,6 +19,16 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* ✅ 활성화된 버튼 스타일 */
+.toggle-button.active {
+    background-color: #1a3a8c;
+    color: #ffffff;
+    font-weight: bold;
+    border: 1px solid #2a4ba0;
+    box-shadow: 0 0 6px rgba(26, 58, 140, 0.6);
 }
 
 .game-cards {
@@ -74,6 +84,7 @@
     align-items: center;
     gap: 14px;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .team.away,
@@ -129,4 +140,14 @@
 
 .weather-cell span {
     font-size: 12px;
+}
+
+.rain-probability {
+    position: absolute;
+    top: 33px;
+    right: 35px;
+    font-size: 1.8rem; /* 글자 크기 살짝 키움 */
+    font-weight: bold;
+    color: #1e88e5;
+
 }

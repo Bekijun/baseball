@@ -9,7 +9,6 @@ public class GameData {
     private String stadium;
     private String start_time;
     private List<WeatherData> weather;
-
     // 로고 경로 (컨트롤러에서 세팅)
     private String homeTeamLogo;
     private String awayTeamLogo;
@@ -64,6 +63,8 @@ public class GameData {
         this.weather = weather;
     }
 
+
+
     public String getHomeTeamLogo() {
         return homeTeamLogo;
     }
@@ -80,8 +81,7 @@ public class GameData {
         this.awayTeamLogo = awayTeamLogo;
     }
 
-    // ✅ 가공된 필드 (날짜 + 시작 시간 → 게임 식별용 키)
     public String getGameTime() {
-        return date + start_time.replace(":", "");
+        return date + start_time.replace(":", "") + stadium;
     }
 }

@@ -11,13 +11,16 @@
 <section layout:fragment="content">
     <div class="weather-container">
         <div class="date-toggle">
-            <button type="button" class="toggle-button" data-type="today">오늘</button>
+            <button type="button" class="toggle-button active" data-type="today">오늘</button>
             <button type="button" class="toggle-button" data-type="tomorrow">내일</button>
         </div>
 
         <div class="game-cards">
-            <div class="game-card" th:each="game : ${games}"
-                 th:attr="data-time=${game.date + game.start_time.replace(':', '')}">
+            <div class="game-card"
+                 th:each="game : ${games}"
+                 th:attr="data-time=${game.gameTime}, data-date=${game.date}, data-home=${game.home}, data-away=${game.away}">
+                <div class="rain-probability">-</div>
+
                 <div class="game-info">
                     <div class="time-location">
                         <span class="time" th:text="${game.start_time}">15:00</span>
@@ -26,19 +29,16 @@
                     <div class="teams-horizontal">
                         <div class="team away">
                             <span th:text="${game.away}">AWAY</span>
-                            <img th:src="@{'/images/' + ${game.away} + '.jpeg'}" alt="Away Team Logo">
+                            <img th:src="@{'/images/logo/' + ${game.away} + '.jpeg'}" alt="Away Logo">
                         </div>
                         <div class="vs">VS</div>
                         <div class="team home">
-                            <img th:src="@{'/images/' + ${game.home} + '.jpeg'}" alt="Home Team Logo">
+                            <img th:src="@{'/images/logo/' + ${game.home} + '.jpeg'}" alt="Home Logo">
                             <span th:text="${game.home}">HOME</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="weather-info">
-                    <!-- JavaScript로 채워짐 -->
-                </div>
+                <div class="weather-info"></div>
             </div>
         </div>
     </div>
@@ -48,30 +48,80 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const cards = document.querySelectorAll(".game-card");
+            const buttons = document.querySelectorAll(".toggle-button");
+
+            function formatDate(date) {
+                const yyyy = date.getFullYear();
+                const mm = String(date.getMonth() + 1).padStart(2, '0');
+                const dd = String(date.getDate()).padStart(2, '0');
+                return `${yyyy}${mm}${dd}`;
+            }
+
+            const todayStr = formatDate(new Date());
+            const tomorrowStr = formatDate(new Date(Date.now() + 86400000));
+
+            function filterGamesByDate(dateStr) {
+                cards.forEach(card => {
+                    const gameDate = card.getAttribute("data-date");
+                    card.style.display = gameDate === dateStr ? "block" : "none";
+                });
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    buttons.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    const selected = btn.dataset.type === 'today' ? todayStr : tomorrowStr;
+                    filterGamesByDate(selected);
+                });
+            });
+
+            filterGamesByDate(todayStr);
+
+            fetch("/data/rain-percent.json")
+                .then(res => res.json())
+                .then(data => {
+                    const percentMap = {};
+                    data.forEach(item => {
+                        const key = `${item.date}-${item.home}-${item.away}`;
+                        percentMap[key] = item.probability;
+                    });
+
+                    cards.forEach(card => {
+                        const date = card.getAttribute("data-date");
+                        const home = card.getAttribute("data-home");
+                        const away = card.getAttribute("data-away");
+                        const key = `${date}-${home}-${away}`;
+                        const percent = percentMap[key];
+                        const probDiv = card.querySelector(".rain-probability");
+                        probDiv.textContent = percent !== undefined ? `${percent}%` : "예측불가";
+                    });
+                });
 
             cards.forEach(card => {
                 const gameTime = card.getAttribute("data-time");
-                const weatherInfoDiv = card.querySelector(".weather-info");
+                const weatherDiv = card.querySelector(".weather-info");
 
                 fetch(`/api/weather?time=${gameTime}`)
-                    .then(response => response.json())
+                    .then(res => res.json())
                     .then(data => {
-                        if (!data || data.length === 0) {
-                            weatherInfoDiv.innerHTML = "<p>날씨 정보 없음</p>";
-                            return;
+                        if (Array.isArray(data) && data.length > 0) {
+                            weatherDiv.innerHTML = data.map(w => `
+                                <div class="weather-cell">
+                                    <span>${w.datetime.substring(8)}시</span>
+                                    <img src="/images/weather/${w.icon || 'unknown'}.svg"
+                                         alt="${w.icon}"
+                                         onerror="this.onerror=null;this.src='/images/weather/unknown.svg';">
+                                    <span>${w.temp}℃</span>
+                                    <span>${w.rain}mm</span>
+                                </div>
+                            `).join('');
+                        } else {
+                            weatherDiv.innerHTML = "<p>날씨 정보 없음</p>";
                         }
-
-                        weatherInfoDiv.innerHTML = data.map(w => `
-                            <div class="weather-cell">
-                                <span>${w.datetime.substring(8)}시</span>
-                                <span>${w.icon}</span>
-                                <span>${w.temp}℃</span>
-                                <span>${w.rain}mm</span>
-                            </div>
-                        `).join('');
                     })
                     .catch(() => {
-                        weatherInfoDiv.innerHTML = "<p>날씨 정보 불러오기 실패</p>";
+                        weatherDiv.innerHTML = "<p>날씨 불러오기 실패</p>";
                     });
             });
         });

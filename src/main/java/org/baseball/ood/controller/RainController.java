@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class RainController {
 
-    private static final String JSON_PATH = "src/main/python/rain-predict.json";
+    private static final String JSON_PATH = "src/main/resources/static/data/rain-predict.json";
 
     @GetMapping("/rain-predict")
     public String showRainPredictPage(Model model) {
@@ -46,8 +46,7 @@ public class RainController {
             if (file.exists()) {
                 List<GameData> games = mapper.readValue(file, new TypeReference<List<GameData>>() {});
                 for (GameData game : games) {
-                    // gameTime 기준이 없어 start_time을 대신 사용
-                    String key = game.getDate() + game.getStart_time().replace(":", "");
+                    String key = game.getDate() + game.getStart_time().replace(":", "") + game.getStadium();
                     if (key.equals(time)) {
                         return game.getWeather();
                     }
