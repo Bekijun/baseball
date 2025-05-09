@@ -1,53 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
 <head>
-    <meta charset="UTF-8">
     <title>야구 챗봇</title>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/scripts.js"></script>
+    <link rel="stylesheet" href="/css/chatbot.css">
 </head>
-<body>
 
-<div style="padding: 30px;">
-    <h2>야구 정보 챗봇</h2>
-
-    <div class="container">
-        <label for="questionType">질문 유형</label>
-        <select id="questionType">
-            <option value="player">선수</option>
-            <option value="team">팀</option>
-            <option value="term">용어</option>
-        </select>
-
-        <input type="text" id="keyword" placeholder="예: 전준우, 롯데, 타율" />
-
-        <button onclick="askBot()">질문하기</button>
-
-        <div id="chatResult" style="margin-top:20px; font-weight: bold;"></div>
+<section layout:fragment="content">
+    <div class="chat-container">
+        <div class="chat-window" id="chatWindow">
+            <div class="message bot">안녕하세요! 야구 정보가 궁금하신가요?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="keyword" placeholder="예: 전준우의 타율, 홈런이 뭐야?" autocomplete="off" />
+            <button id="sendBtn">질문하기</button>
+        </div>
     </div>
-</div>
+</section>
 
-<script>
-    function askBot() {
-        const type = document.getElementById("questionType").value;
-        const keyword = document.getElementById("keyword").value;
+<th:block layout:fragment="script">
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', askBot);
+        document.getElementById('keyword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') askBot();
+        });
 
-        fetch("/ask", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question_type: type, keyword: keyword })
-        })
-            .then(response => response.json())  // ✅ JSON으로 받음
-            .then(data => {
-                document.getElementById("chatResult").innerText =
-                    `${type}에 대한 키워드는 ${keyword}입니다\n응답: ${data.answer}`;  // ✅ JSON 파싱 후 출력
+        function appendMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = 'message ' + sender;
+            div.innerText = text;
+            document.getElementById('chatWindow').appendChild(div);
+            document.getElementById('chatWindow').scrollTop = document.getElementById('chatWindow').scrollHeight;
+        }
+
+        function askBot() {
+            const input = document.getElementById("keyword").value.trim();
+            if (!input) return;
+
+            appendMessage(input, 'user');
+            document.getElementById("keyword").value = '';
+
+            fetch("/ask-nl", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: input })
             })
-            .catch(error => {
-                document.getElementById("chatResult").innerText = "서버 오류: " + error;
-            });
-    }
-</script>
+                .then(res => res.json())
+                .then(data => {
+                    const answer = data.answer || '죄송해요, 응답을 받을 수 없었어요.';
+                    appendMessage(answer, 'bot');
+                })
+                .catch(err => {
+                    appendMessage("서버 오류: " + err, 'bot');
+                });
+        }
+    </script>
+</th:block>
 
-</body>
 </html>
