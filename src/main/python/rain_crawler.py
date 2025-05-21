@@ -9,15 +9,23 @@ from datetime import datetime, timedelta
 import json
 import time
 import os
+import re
 
 STADIUM_TO_CODE = {
     "잠실": "09710720", "고척": "09530106", "수원": "02111135",
     "대전(신)": "07140111", "광주": "05170105", "대구": "06260123",
-    "창원": "03127105", "사직": "08260109", "문학": "11177107"
+    "창원": "03127105", "사직": "08260109", "문학": "11177107", "울산": "10140102"
 }
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 JSON_PATH = "src/main/resources/static/data/rain-predict.json"
-OUTPUT_JSON = os.path.join(BASE_DIR, "src", "main", "resources", "static", "data", "rain-predict.json")
+OUTPUT_JSON = os.path.join(BASE_DIR, "resources", "static", "data", "rain-predict.json")
+
+
+def extract_hour(game_time):
+    numbers = re.findall(r'\d+', game_time)
+    return int(numbers[0]) if numbers else 18
+
 
 def get_game_schedule(date_str):
     options = Options()
@@ -32,29 +40,33 @@ def get_game_schedule(date_str):
         game_elements = driver.find_elements(By.CSS_SELECTOR, ".today-game .game-cont")
         games = []
         for game in game_elements:
-            away = game.get_attribute("away_nm")
-            home = game.get_attribute("home_nm")
-            stadium = game.get_attribute("s_nm")
-            time_str = game.find_element(By.CSS_SELECTOR, ".top ul li:nth-child(3)").text
-            games.append({"date": date_str, "away": away, "home": home, "stadium": stadium, "start_time": time_str})
+            try:
+                away = game.get_attribute("away_nm")
+                home = game.get_attribute("home_nm")
+                stadium = game.get_attribute("s_nm")
+                time_str = game.find_element(By.CSS_SELECTOR, ".top ul li:nth-child(3)").text
+                games.append({"date": date_str, "away": away, "home": home, "stadium": stadium, "start_time": time_str})
+            except:
+                continue
         return games
+    except:
+        return []
     finally:
         driver.quit()
 
-def get_weather_data(stadium, date_str, game_time):
+
+def get_weather_data(driver, stadium, date_str, game_time):
     code = STADIUM_TO_CODE.get(stadium)
     if not code:
         return []
 
     try:
-        hour = int(game_time.split(":")[0])
+        hour = extract_hour(game_time)
     except:
         return []
 
     hours = [(datetime.strptime(date_str, "%Y%m%d") + timedelta(hours=hour+i)).strftime("%Y%m%d%H") for i in range(-3, 3)]
-    options = Options()
-    options.add_argument("--headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
     try:
         url = f"https://weather.naver.com/today/{code}?cpName=ACCUWEATHER"
         driver.get(url)
@@ -76,8 +88,9 @@ def get_weather_data(stadium, date_str, game_time):
             except:
                 continue
         return result
-    finally:
-        driver.quit()
+    except:
+        return []
+
 
 def load_existing_data():
     if not os.path.exists(JSON_PATH):
@@ -85,9 +98,11 @@ def load_existing_data():
     with open(JSON_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
 def generate_expected_hours(date_str, game_time):
     base_time = datetime.strptime(date_str + game_time, "%Y%m%d%H:%M")
     return [(base_time + timedelta(hours=i)).strftime("%Y%m%d%H") for i in range(-3, 3)]
+
 
 def merge_weather_data(old_data, new_data, expected_hours):
     old_map = {w["datetime"]: w for w in old_data}
@@ -103,6 +118,7 @@ def merge_weather_data(old_data, new_data, expected_hours):
             merged.append({"datetime": h, "icon": "정보없음", "temp": "-", "rain": "-"})
     return merged
 
+
 def merge_game_data(old_games, new_games):
     merged = []
     for game in new_games:
@@ -114,13 +130,25 @@ def merge_game_data(old_games, new_games):
         merged.append(game)
     return merged
 
+
 def collect_all():
     today = datetime.today()
     tomorrow = today + timedelta(days=1)
-    new_games = get_game_schedule(today.strftime("%Y%m%d")) + get_game_schedule(tomorrow.strftime("%Y%m%d"))
 
-    for game in new_games:
-        game["weather"] = get_weather_data(game["stadium"], game["date"], game["start_time"])
+    today_games = get_game_schedule(today.strftime("%Y%m%d"))
+    tomorrow_games = get_game_schedule(tomorrow.strftime("%Y%m%d"))
+
+    new_games = today_games + tomorrow_games
+
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    try:
+        for game in new_games:
+            game["weather"] = get_weather_data(driver, game["stadium"], game["date"], game["start_time"])
+    finally:
+        driver.quit()
 
     existing_games = load_existing_data()
     final_merged = merge_game_data(existing_games, new_games)
@@ -129,5 +157,4 @@ def collect_all():
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(final_merged, f, ensure_ascii=False, indent=2)
 
-# 실행
 collect_all()

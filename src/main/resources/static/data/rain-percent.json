@@ -1,0 +1,62 @@
+[
+  {
+    "date": "20250521",
+    "home": "두산",
+    "away": "SSG",
+    "probability": 1.11
+  },
+  {
+    "date": "20250521",
+    "home": "롯데",
+    "away": "LG",
+    "probability": 1.11
+  },
+  {
+    "date": "20250521",
+    "home": "KT",
+    "away": "KIA",
+    "probability": 1.11
+  },
+  {
+    "date": "20250521",
+    "home": "키움",
+    "away": "삼성",
+    "probability": 1.11
+  },
+  {
+    "date": "20250521",
+    "home": "NC",
+    "away": "한화",
+    "probability": 1.11
+  },
+  {
+    "date": "20250522",
+    "home": "두산",
+    "away": "SSG",
+    "probability": 1.11
+  },
+  {
+    "date": "20250522",
+    "home": "롯데",
+    "away": "LG",
+    "probability": 1.11
+  },
+  {
+    "date": "20250522",
+    "home": "KT",
+    "away": "KIA",
+    "probability": 1.11
+  },
+  {
+    "date": "20250522",
+    "home": "키움",
+    "away": "삼성",
+    "probability": 1.11
+  },
+  {
+    "date": "20250522",
+    "home": "NC",
+    "away": "한화",
+    "probability": 1.11
+  }
+]

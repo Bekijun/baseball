@@ -22,7 +22,6 @@
     transition: all 0.2s ease-in-out;
 }
 
-/* ✅ 활성화된 버튼 스타일 */
 .toggle-button.active {
     background-color: #1a3a8c;
     color: #ffffff;
@@ -146,7 +145,7 @@
     position: absolute;
     top: 33px;
     right: 35px;
-    font-size: 1.8rem; /* 글자 크기 살짝 키움 */
+    font-size: 1.8rem;
     font-weight: bold;
     color: #1e88e5;
 
