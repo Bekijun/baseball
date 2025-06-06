@@ -87,70 +87,6 @@ body {
     background: #ffffff;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #666;
-    font-size: 16px;
-}
-
-/* 팀 선택 셀렉트 박스 및 응원 버튼 */
-.select-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    background: #fff;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button.navigate-button {
-    background: #007bff;
-    color: #fff;
-}
-
-button.navigate-button:hover {
-    background: #0056b3;
-}
-
-/* 로그인/로그아웃 */
-.logout-button {
-    background: #dc3545;
-    color: #fff;
-}
-
-.logout-button:hover {
-    background: #a71d2a;
-}
-
-.login-button {
-    background: #49a8f5;
-    color: #fff;
-}
-
-.login-button:hover {
-    background: #237cd8;
-}
-
 /* 푸터 */
 .footer {
     text-align: center;
@@ -159,4 +95,77 @@ button.navigate-button:hover {
     border-top: 1px solid #ccc;
     font-size: 14px;
     color: #666;
+}
+
+.main-hero {
+    /* 좌측 사이드바(200px) + 여유(20px) 고려 */
+    margin-left: 220px;
+    /* 헤더 높이(60px) 고려 */
+    margin-top: 60px;
+
+    /* 헤더를 제외한 화면 높이만큼 채움 */
+    height: calc(100vh - 60px);
+    width: calc(100% - 220px);
+
+    /* 배경 이미지: 화면에 꽉 차도록 cover */
+    background: url("/images/baseball-field.jpeg") no-repeat center top;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000; /* 이미지를 불러올 수 없을 때 대비 */
+
+    /* 텍스트 중앙 정렬 (세로/가로 모두 중앙) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* 이미지 위 텍스트 가독성 확보 */
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+
+    /* overflow 숨기면 스크롤 없이 딱 맞게 보여줍니다 */
+    overflow: hidden;
+}
+
+/* 슬라이드 애니메이션 정의 */
+@keyframes slideUpFadeIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.main-hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+
+    /* 애니메이션 적용: 아래에서 위로 올라오며 fade-in */
+    animation: slideUpFadeIn 1s ease-out forwards;
+    animation-delay: 0.3s;
+    opacity: 0; /* 초기 상태(투명) */
+}
+
+.main-hero p {
+    font-size: 24px;
+    margin-bottom: 30px;
+    max-width: 800px;
+    text-align: center;
+
+    animation: slideUpFadeIn 1s ease-out forwards;
+    animation-delay: 0.6s;
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .main-hero h2 {
+        font-size: 32px;
+    }
+    .main-hero p {
+        font-size: 18px;
+    }
 }
